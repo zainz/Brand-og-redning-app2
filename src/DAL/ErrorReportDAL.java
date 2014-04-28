@@ -28,9 +28,9 @@ public class ErrorReportDAL extends AbstractDAL {
         try{
             con = getConnection();
             stmt = con.createStatement();
-            stmt.executeUpdate("INSERT INTO ErrorReport (date, employeeName, error, cause, notWorking, important, occasion) "
-                    + "VALUES ('" + er.getDate() + "', '" + er.getEmployeeName() + "', '"
-                    + er.getError() + "', '" + er.getCause() + "', " + er.getNotWorking() + ", " + er.getImportant() + ", '" + er.getOccasion() + "')");
+            stmt.executeUpdate("INSERT INTO Køretøj-fejlrapport (dato, køretøj_FK, fejl, årsag, ude_af_drift, haster, udfyldt_af) "
+                    + "VALUES ('" + er.getDate() + "', '" + er.getVehicle()+ "', '"
+                    + er.getError() + "', '" + er.getCause() + "', " + er.getNotWorking() + ", " + er.getImportant() + ", '" + er.getEmployeeName()+ "')");
         } finally{
             if(con != null) con.close();
         }
