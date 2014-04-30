@@ -5,7 +5,7 @@
  */
 
 package GUI;
-import BE.Employee;
+import BE.Fireman;
 import BE.ErrorReport;
 import BE.TeamLeaderReport;
 import BLL.EmployeeBLL;
