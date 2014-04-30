@@ -16,12 +16,12 @@ import javax.swing.JRadioButton;
 public class ButtonGroupe extends javax.swing.ButtonGroup {
     ArrayList<JRadioButton> buttons;
 
-
-    public MybuttonGroup(){
-    super();
-    buttons = new ArrayList();
-
-}
+//
+//    public MybuttonGroup(){
+//    super();
+//    buttons = new ArrayList();
+//
+//}
     public void addRadioButton(JRadioButton btn){
         buttons.add(btn);
         super.add(btn);
