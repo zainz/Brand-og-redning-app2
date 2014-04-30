@@ -12,16 +12,37 @@ package BE;
  */
 public class TeamLeaderReport {
     
-    String teamleader, commander, alarmReceived, weekday, message, personName, personAddress, date;
-    String fireReportNo, evaReportNo;
-    
-    String htRør, strålerør, bSlanger, cSlanger, røgdykkerapp, flasker, frigørelsesMat, overtryksVent, 
-            vandforbrug, skumvæske, lysMat, pulverSluk, kulSluk, flydeSpær, absordan, absorbent, 
-            engangsPres, mængde, sprænglågsfode;
-    
-    String type, groupNo, detektorNo;
-    
-    String remark, beretning;
+    private String holdleder;
+    private String indsatsleder;
+    private String alarmModtaget;
+    private String ugedag;
+    private String beskrivelse;
+    private String dato;
+    private String udrykningsNo;
+    private String evaNo;
+    private String htRør;
+    private String strålerør;
+    private String bSlanger;
+    private String cSlanger;
+    private String røgdykkerapp;
+    private String flasker;
+    private String frigørelsesMat;
+    private String overtryksVent;
+    private String vandforbrug;
+    private String skumvæske;
+    private String lysMat;
+    private String pulverSluk;
+    private String kulSluk;
+    private String flydeSpær;
+    private String absordan;
+    private String absorbent;
+    private String engangsPres;
+    private String mængde;
+    private String sprænglågsfode;
+    private String type;
+    private String gruppeNo;
+    private String detektorNo;
+    private String bemærkning;
     
     public TeamLeaderReport(String teamLeader, String commander, String alarmReceived, String weekday, 
             String message, String personName, String personAddress, String date, String fireReportNo, 
@@ -30,16 +51,14 @@ public class TeamLeaderReport {
             String kulSluk, String flydeSpær, String absordan, String absorbent, String engangsPres, String mængde, String sprænglågsfode, 
             String type, String groupNo, String detektorNo, String remark, String beretning){
         
-        this.teamleader = teamLeader;
-        this.commander = commander;
-        this.alarmReceived = alarmReceived;
-        this.weekday = weekday;
-        this.message = message;
-        this.personName = personName;
-        this.personAddress = personAddress;
-        this.date = date;
-        this.fireReportNo = fireReportNo;
-        this.evaReportNo = evaReportNo;
+        this.holdleder = teamLeader;
+        this.indsatsleder = commander;
+        this.alarmModtaget = alarmReceived;
+        this.ugedag = weekday;
+        this.beskrivelse = message;
+        this.dato = date;
+        this.udrykningsNo = fireReportNo;
+        this.evaNo = evaReportNo;
         
         this.htRør= htRør;
         this.strålerør = strålerør;
@@ -62,273 +81,227 @@ public class TeamLeaderReport {
         this.sprænglågsfode = sprænglågsfode;
         
         this.type = type;
-        this.groupNo = groupNo;
+        this.gruppeNo = groupNo;
         this.detektorNo = detektorNo;
         
-        this.remark = remark;
-        this.beretning = beretning;
+        this.bemærkning = remark;
     }
 
     /**
-     * @return the teamleader
+     * @return the holdleder
      */
-    public String getTeamleader() {
-        return teamleader;
+    public String getHoldleder() {
+        return holdleder;
     }
 
     /**
-     * @return the commander
+     * @return the indsatsleder
      */
-    public String getCommander() {
-        return commander;
+    public String getIndsatsleder() {
+        return indsatsleder;
     }
 
     /**
-     * @return the alarmReceived
+     * @return the alarmModtaget
      */
-    public String getAlarmReceived() {
-        return alarmReceived;
+    public String getAlarmModtaget() {
+        return alarmModtaget;
     }
 
     /**
-     * @return the weekday
+     * @return the ugedag
      */
-    public String getWeekday() {
-        return weekday;
+    public String getUgedag() {
+        return ugedag;
     }
 
     /**
-     * @return the message
+     * @return the beskrivelse
      */
-    public String getMessage() {
-        return message;
+    public String getBeskrivelse() {
+        return beskrivelse;
     }
 
     /**
-     * @return the personName
+     * @return the dato
      */
-    public String getPersonName() {
-        return personName;
+    public String getDato() {
+        return dato;
     }
 
     /**
-     * @return the personAddress
+     * @return the udrykningsNo
      */
-    public String getPersonAddress() {
-        return personAddress;
+    public String getUdrykningsNo() {
+        return udrykningsNo;
     }
 
     /**
-     * @return the date
+     * @return the evaNo
      */
-    public String getDate() {
-        return date;
-    }
-
-    /**
-     * @return the fireReportNo
-     */
-    public int getFireReportNo() {
-        int temp = Integer.parseInt(fireReportNo);
-        return temp;
-    }
-
-    /**
-     * @return the evaReportNo
-     */
-    public int getEvaReportNo() {
-        int temp = Integer.parseInt(evaReportNo);
-        return temp;
+    public String getEvaNo() {
+        return evaNo;
     }
 
     /**
      * @return the htRør
      */
-    public int getHtRør() {
-        int temp = Integer.parseInt(htRør);
-        return temp;
+    public String getHtRør() {
+        return htRør;
     }
 
     /**
      * @return the strålerør
      */
-    public int getStrålerør() {
-        int temp = Integer.parseInt(strålerør);
-        return temp;
+    public String getStrålerør() {
+        return strålerør;
     }
 
     /**
      * @return the bSlanger
      */
-    public int getbSlanger() {
-        int temp = Integer.parseInt(bSlanger);
-        return temp;
+    public String getbSlanger() {
+        return bSlanger;
     }
 
     /**
      * @return the cSlanger
      */
-    public int getcSlanger() {
-        int temp = Integer.parseInt(cSlanger);
-        return temp;
+    public String getcSlanger() {
+        return cSlanger;
     }
 
     /**
      * @return the røgdykkerapp
      */
-    public int getRøgdykkerapp() {
-        int temp = Integer.parseInt(røgdykkerapp);
-        return temp;
+    public String getRøgdykkerapp() {
+        return røgdykkerapp;
     }
 
     /**
      * @return the flasker
      */
-    public int getFlasker() {
-        int temp = Integer.parseInt(flasker);
-        return temp;
+    public String getFlasker() {
+        return flasker;
     }
 
     /**
      * @return the frigørelsesMat
      */
-    public int getFrigørelsesMat() {
-        int temp = Integer.parseInt(frigørelsesMat);
-        return temp;
+    public String getFrigørelsesMat() {
+        return frigørelsesMat;
     }
 
     /**
      * @return the overtryksVent
      */
-    public int getOvertryksVent() {
-        int temp = Integer.parseInt(overtryksVent);
-        return temp;
+    public String getOvertryksVent() {
+        return overtryksVent;
     }
 
     /**
      * @return the vandforbrug
      */
-    public int getVandforbrug() {
-        int temp = Integer.parseInt(vandforbrug);
-        return temp;
+    public String getVandforbrug() {
+        return vandforbrug;
     }
 
     /**
      * @return the skumvæske
      */
-    public int getSkumvæske() {
-        int temp = Integer.parseInt(skumvæske);
-        return temp;
+    public String getSkumvæske() {
+        return skumvæske;
     }
 
     /**
      * @return the lysMat
      */
-    public int getLysMat() {
-        int temp = Integer.parseInt(lysMat);
-        return temp;
+    public String getLysMat() {
+        return lysMat;
     }
 
     /**
      * @return the pulverSluk
      */
-    public int getPulverSluk() {
-        int temp = Integer.parseInt(pulverSluk);
-        return temp;
+    public String getPulverSluk() {
+        return pulverSluk;
     }
 
     /**
      * @return the kulSluk
      */
-    public int getKulSluk() {
-        int temp = Integer.parseInt(kulSluk);
-        return temp;
+    public String getKulSluk() {
+        return kulSluk;
     }
 
     /**
      * @return the flydeSpær
      */
-    public int getFlydeSpær() {
-        int temp = Integer.parseInt(flydeSpær);
-        return temp;
+    public String getFlydeSpær() {
+        return flydeSpær;
     }
 
     /**
      * @return the absordan
      */
-    public int getAbsordan() {
-        int temp = Integer.parseInt(absordan);
-        return temp;
+    public String getAbsordan() {
+        return absordan;
     }
 
     /**
      * @return the absorbent
      */
-    public int getAbsorbent() {
-        int temp = Integer.parseInt(absorbent);
-        return temp;
+    public String getAbsorbent() {
+        return absorbent;
     }
 
     /**
      * @return the engangsPres
      */
-    public int getEngangsPres() {
-        int temp = Integer.parseInt(engangsPres);
-        return temp;
+    public String getEngangsPres() {
+        return engangsPres;
     }
 
     /**
      * @return the mængde
      */
-    public int getMængde() {
-        int temp = Integer.parseInt(mængde);
-        return temp;
+    public String getMængde() {
+        return mængde;
     }
 
     /**
      * @return the sprænglågsfode
      */
-    public int getSprænglågsfode() {
-        int temp = Integer.parseInt(sprænglågsfode);
-        return temp;
+    public String getSprænglågsfode() {
+        return sprænglågsfode;
     }
 
     /**
      * @return the type
      */
-    public int getType() {
-        int temp = Integer.parseInt(type);
-        return temp;
-    }
-    
-    /**
-     * 
-     * @return the beretning 
-     */
-    public String getBeretning(){
-        return beretning;
+    public String getType() {
+        return type;
     }
 
     /**
-     * @return the groupNo
+     * @return the gruppeNo
      */
-    public int getGroupNo() {
-        int temp = Integer.parseInt(groupNo);
-        return temp;
+    public String getGruppeNo() {
+        return gruppeNo;
     }
 
     /**
      * @return the detektorNo
      */
-    public int getDetektorNo() {
-        int temp = Integer.parseInt(detektorNo);
-        return temp;
+    public String getDetektorNo() {
+        return detektorNo;
     }
 
     /**
-     * @return the remark
+     * @return the bemærkning
      */
-    public String getRemark() {
-        return remark;
+    public String getBemærkning() {
+        return bemærkning;
     }
+
 }

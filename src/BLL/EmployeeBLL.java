@@ -6,7 +6,7 @@
 
 package BLL;
 
-import BE.Employee;
+import BE.Fireman;
 import DAL.EmployeeDAL;
 import java.sql.SQLException;
 
@@ -18,7 +18,7 @@ public class EmployeeBLL {
     
     EmployeeDAL emd = new EmployeeDAL();
     
-    public Employee getEmployeeByCpr(Employee e) throws SQLException{
-        return emd.getEmployeeByCpr(e);
+    public Fireman getEmployeeByCpr(Fireman fm) throws SQLException{
+        return emd.getFiremanByCpr(fm);
     }
 }

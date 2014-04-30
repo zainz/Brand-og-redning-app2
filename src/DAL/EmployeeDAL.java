@@ -6,7 +6,7 @@
 
 package DAL;
 
-import BE.Employee;
+import BE.Fireman;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,27 +17,27 @@ import java.sql.SQLException;
  */
 public class EmployeeDAL extends AbstractDAL {
     
-    public Employee getEmployeeByCpr(Employee e) throws SQLException{
+    public Fireman getFiremanByCpr(Fireman e) throws SQLException{
         Connection con = null;
-        Employee employee = null;
+        Fireman fm = null;
         
         try{
             con = getConnection();
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Firemen WHERE cprNo = '" + e.getCprNo() + "'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Brandmand WHERE cpr_no = '" + e.getCprNo() + "'");
             while(rs.next()){
-                String cprNo = rs.getString("cprNo");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                String address = rs.getString("address");
-                String phone = rs.getString("phone");
-                String callNo = rs.getString("callNo");
-                String paymentNo = rs.getString("paymentNo");
-                employee = new Employee(cprNo, firstName, lastName, address, phone, callNo, paymentNo);
+                String cprNo = rs.getString("cpr_no");
+                String firstName = rs.getString("fornavn");
+                String lastName = rs.getString("efternavn");
+                String address = rs.getString("adresse");
+                String phone = rs.getString("telefon");
+                String callNo = rs.getString("udkalds_nummer");
+                String paymentNo = rs.getString("løn_nummer");
+                fm = new Fireman(cprNo, firstName, lastName, address, phone, callNo, paymentNo);
             }
         } finally{
             if(con!=null) con.close();
         }
-        return employee;
+        return fm;
     }
 }

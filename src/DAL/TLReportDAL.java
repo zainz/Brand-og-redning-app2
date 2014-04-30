@@ -6,9 +6,9 @@
 
 package DAL;
 
+import BE.InjuredPerson;
 import BE.TeamLeaderReport;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -30,8 +30,8 @@ public class TLReportDAL extends AbstractDAL {
         try{
             con = getConnection();
             stmt = con.createStatement();
-            stmt.executeUpdate("INSERT INTO Forbrug (htRør, strålerør, bSlanger, cSlanger, røgdykkerapp, flasker, firgørelsesmateriale, overtryksventiler, vandforbrug, skumvæske, "
-                    + "lysmateriel, pulverslukker, kulsyreslukker, flydespærringer, absodant, absorbent, engangspresseninger, mængdeOpsamlet, sprænglågsfode)"
+            stmt.executeUpdate("INSERT INTO Udrykning_forbrug (ht_rør, stål_rør, b_slange, c_slange, røgdykker_rapport, flaske, firgørelsesmateriale, overtryksventil, vandforbrug, skumvæske, "
+                    + "lys_materiale, pulverslukker, kulsyreslukker, flydespærringer, absordan, absorbentW, engangspressening, mængde_opsamlet, sprænglågsfade)"
                     + " VALUES(" + tlr.getHtRør() + ", " + tlr.getStrålerør() + ", " + tlr.getbSlanger() + ", " + tlr.getcSlanger() + ", " 
                     + tlr.getRøgdykkerapp() + ", " + tlr.getFlasker() + ", " + tlr.getFrigørelsesMat() + ", " + tlr.getOvertryksVent() + ", '" + tlr.getVandforbrug() + "', '" 
                     + tlr.getSkumvæske() + "', " + tlr.getLysMat() + ", " + tlr.getPulverSluk() + ", " + tlr.getKulSluk() + ", " + tlr.getFlydeSpær() + ", " 
@@ -40,16 +40,27 @@ public class TLReportDAL extends AbstractDAL {
             
             int forbrugId = stmt.getGeneratedKeys().getInt(1);
             
-            ResultSet rs = stmt.executeQuery("SELECT id FROM Beretning WHERE description = '" + tlr.getBeretning());
-            int beretningId = 0;
-            while(rs.next()){
-                beretningId = rs.getInt("id");
-            }
-            
-            stmt.executeUpdate("INSERT INTO Team_leader_report (teamleader, commander, date, alarmRecieved, weekday, firereportNo, evaNo, message, consumption, account, remark)"
-                    + " VALUES('" + tlr.getTeamleader() + "', '" + tlr.getCommander() + "', '" + tlr.getDate() + "', '" 
-                    + tlr.getAlarmReceived() + "', '" + tlr.getWeekday() + "', " + tlr.getFireReportNo() + ", " + tlr.getEvaReportNo() + ", '" + tlr.getMessage() + "', " 
-                    + forbrugId + ", " + beretningId + ", '" + tlr.getRemark() + "')");
+            stmt.executeUpdate("INSERT INTO Udrykning (dato, ugedag, beskrivelse, alarm_modtaget, indsatsleder, holdleder, forbrug_FK, udryknings_no, eva_no, bemærkning)"
+                    + " VALUES('" + tlr.getDato()+ "', '" + tlr.getUgedag()+ "', '" + tlr.getBeskrivelse()+ "', '" 
+                    + tlr.getAlarmModtaget()+ "', '" + tlr.getIndsatsleder() + "', " + tlr.getHoldleder() + ", " + forbrugId + ", " + tlr.getUdrykningsNo()+ ", '" + tlr.getEvaNo()+ "', '" 
+                    + tlr.getBemærkning() + "')");
+        } finally{
+            if(con != null) con.close();
+        }
+    }
+    
+    public void addInjury(InjuredPerson ip) throws SQLException{
+        Connection con = null;
+        
+        try{
+            con = getConnection();
+            stmt = con.createStatement();
+            stmt.executeUpdate("INSERT INTO Tilskadekommende (fornavn, efternavn, adresse) "
+                    + "VALUES ('" + ip.getFirstName() + "', '" + ip.getLastName() + "', '" + ip.getAddress() + "')", Statement.RETURN_GENERATED_KEYS);
+                    
+            int temp = stmt.getGeneratedKeys().getInt(1);
+            stmt.executeUpdate("INSERT INTO Udryknings_tilskadekommende (udrykning, tilskadekommende) "
+                    + "VALUES (udrykning, " + temp + ")");
         } finally{
             if(con != null) con.close();
         }

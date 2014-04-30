@@ -10,7 +10,7 @@ package BE;
  *
  * @author Christian
  */
-public class Employee {
+public class Fireman {
     
     private String cprNo;
     private String firstName;
@@ -20,7 +20,7 @@ public class Employee {
     private String callNo;
     private String paymentNo;
     
-    public Employee(String cprNo, String firstName, String lastName, String address, String phone, String callNo, String paymentNo){
+    public Fireman(String cprNo, String firstName, String lastName, String address, String phone, String callNo, String paymentNo){
         this.cprNo = cprNo;
         this.firstName = firstName;
         this.lastName = lastName;
