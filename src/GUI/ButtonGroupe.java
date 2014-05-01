@@ -16,18 +16,28 @@ import javax.swing.JRadioButton;
 public class ButtonGroupe extends javax.swing.ButtonGroup {
     ArrayList<JRadioButton> buttons;
 
-//
-//    public MybuttonGroup(){
-//    super();
-//    buttons = new ArrayList();
-//
-//}
+
+    public ButtonGroupe(){
+    super();
+    buttons = new ArrayList();
+
+}
     public void addRadioButton(JRadioButton btn){
         buttons.add(btn);
         super.add(btn);
     }
     
+   public JRadioButton getSelectedButton(){
+        JRadioButton btn = null;
+        for(JRadioButton thisButton: buttons){
+            if(thisButton.isSelected()){
+                return thisButton;
+                
+            }
+        }
+        
+        return btn; 
     
     
-    
+}
 }

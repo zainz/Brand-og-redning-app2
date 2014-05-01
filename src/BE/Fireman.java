@@ -6,6 +6,8 @@
 
 package BE;
 
+import javax.swing.ButtonModel;
+
 /**
  *
  * @author Christian
