@@ -6,15 +6,24 @@
 
 package GUI;
 
+import BE.ErrorReport;
+import BE.Fireman;
+import BLL.EmployeeBLL;
+import BLL.ErrorReportBLL;
+import BLL.TLReportBLL;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Nicolai
  */
 public class ReperationsFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ReperationsFrame
-     */
+    
+    EmployeeBLL EBLL;
+    ErrorReportBLL ERBLL;
+    TLReportBLL TLRBLL;
+    Fireman FM;
     public ReperationsFrame() {
         initComponents();
     }
@@ -210,7 +219,13 @@ public class ReperationsFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtReperationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReperationActionPerformed
-        // TODO add your handling code here:
+//        ErrorReport TLRBLL = new ErrorReport(txtVogn.getText(), txtFejl.getText(), txtÅrsag.getText(), txtDrift.getText(), txtHaster.getText(), txtLejlighed.getText(), txtNavne.getText(), txtReperation.getText());
+//        try {
+//            EBLL.getEmployeeByCpr(Fm);
+//            setVisible(false);
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(this, "Connection to datbase lost: " + ex.getMessage());
+//        }
     }//GEN-LAST:event_txtReperationActionPerformed
 
     private void BtnAnullerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnullerActionPerformed
