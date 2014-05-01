@@ -15,6 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -91,8 +95,18 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         BtnReperation.setText("Reperation...");
+        BtnReperation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReperationActionPerformed(evt);
+            }
+        });
 
         BtnHoldLeder.setText("Hold Leder...");
+        BtnHoldLeder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHoldLederActionPerformed(evt);
+            }
+        });
 
         txtIndsats.setText("Navn på indsats");
 
@@ -232,10 +246,23 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnGemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGemActionPerformed
-//        try{
-//            Fireman Fm = new Fireman(txtCpr.getText(), ComboboxBil.getSelectedItem(), txtTidsrum.getText(), txtKørt.getText(), buttonGroup1.getSelection(),buttonGroup2.getSelection()tedIndex());
-        
+//        Fireman Fm = new Fireman(txtCpr.getText(), ComboboxBil.getSelectedItem(), txtTidsrum.getText(), txtKørt.getText(), buttonGroup1.getSelection(),buttonGroup2.getSelection());
+//        try {
+//            EBLL.getEmployeeByCpr(Fm);
+//            setVisible(false);
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(this, "Connection to datbase lost: " + ex.getMessage());
+//        }
+   
     }//GEN-LAST:event_BtnGemActionPerformed
+
+    private void BtnReperationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReperationActionPerformed
+        new ReperationsFrame().setVisible(true);
+    }//GEN-LAST:event_BtnReperationActionPerformed
+
+    private void BtnHoldLederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHoldLederActionPerformed
+        new HoldLederFrame().setVisible(true);
+    }//GEN-LAST:event_BtnHoldLederActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,33 +330,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void setButtons(){
         
     
-        BtnReperation.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent ae){
-           new ReperationsFrame().setVisible(true);    
-            }
-        });
-    
-        BtnHoldLeder.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent ae){
-           new HoldLederFrame().setVisible(true);    
-            }
-        });
-    
-//        outputGroupe = new ButtonGroupe();
-//        
-//        
-//        
-//        
-//        
-//        BtnGem.addActionListener(new ActionListener(){
-//            
-//            @Override
-//            public void actionPerformed(ActionEvent ae){
-//             Employee e = new Employee(txtCpr.getText(), txtHvad.getText(), txtIndsats.getText(), txtKørt.getText(), txtTidsrum.getText(), ComboboxBil.getSelectedItem().toString(),RBtnØvelse.getsel   
-//            }
-//        }
+        
 
    }
 class myKeyListener extends KeyAdapter{

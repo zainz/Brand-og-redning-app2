@@ -177,11 +177,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reperation..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnReperationActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnHoldLeder">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hold Leder..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnHoldLederActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtHvad">
     </Component>
