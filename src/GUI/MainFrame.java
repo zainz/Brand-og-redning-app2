@@ -36,6 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         
+        setButtons();
         
     }
 
@@ -215,42 +216,6 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnGem;
     private javax.swing.JButton BtnHoldLeder;
@@ -283,27 +248,28 @@ public class MainFrame extends javax.swing.JFrame {
         BtnReperation.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){
-           new ReperationsFrame().setVisible(true);    
+                new ReperationsFrame().setVisible(true);    
             }
         });
     
         BtnHoldLeder.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){
-           new HoldLederFrame().setVisible(true);    
+                new HoldLederFrame().setVisible(true);    
             }
         });
     
-//        BtnGem.addActionListener(new ActionListener(){
-//            
-//            @Override
-//            public void actionPerformed(ActionEvent ae){
-//             Employee e = new Employee(txtCpr.getText(), txtHvad.getText(), txtIndsats.getText(), txtKørt.getText(), txtTidsrum.getText(), ComboboxBil.getSelectedItem().toString(),RBtnØvelse.getsel   
-//            }
-//        }
+        BtnGem.addActionListener(new ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                Fireman f = new Fireman(txtCpr.getText(), txtHvad.getText(), txtIndsats.getText(), txtKørt.getText(), txtTidsrum.getText(), ComboboxBil.getSelectedItem().toString(),buttonGroup1.getSelection().toString());
+            }
+        });
 
    }
-class myKeyListener extends KeyAdapter{
+    
+    class myKeyListener extends KeyAdapter{ 
         
         @Override
         public void keyPressed(KeyEvent e) {
@@ -311,5 +277,5 @@ class myKeyListener extends KeyAdapter{
             }  
                 
             }
-}
+    }
 }

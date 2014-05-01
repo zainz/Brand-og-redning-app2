@@ -21,8 +21,6 @@ public class BrandOgRedningApp2 {
      */
     public static void main(String[] args) throws SQLException {
         new MainFrame().setVisible(true);
-        ErrorReportBLL bll = new ErrorReportBLL();
-                bll.newErrorReport(new ErrorReport(1, 1, 2, "lol", "lol", "lol", "lol", "lol", "lol", "lol"));
         
     }
     
