@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -167,6 +169,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Gem"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnGemActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnReperation">
       <Properties>
@@ -187,16 +192,25 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="CheckBoxCH">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup2"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="CH"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="CheckBoxX">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup2"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="X"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="CheckBoxSt">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup2"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="ST"/>
       </Properties>
     </Component>
@@ -207,31 +221,49 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="RBtnIndsats">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Indsats"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="RBtn&#xd8;velse">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="&#xd8;velse"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="RBtnBandvagt">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Bandvagt"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="RBtnStandby">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Stand-by"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="RBtnFalck">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Arbejde Falck"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="RBtnF&#xf8;lgeskade">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="F&#xf8;lgeskade"/>
       </Properties>
     </Component>
@@ -242,6 +274,9 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="RBtnSkade">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Andet (hvad)"/>
       </Properties>
     </Component>

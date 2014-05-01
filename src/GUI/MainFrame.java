@@ -25,7 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
     EmployeeBLL EBLL;
     ErrorReportBLL ERBLL;
     TLReportBLL TLRBLL;
-    
+    Fireman FM;
     
     /**
      * Creates new form MainFrame
@@ -49,6 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         txtCpr = new javax.swing.JTextField();
         ComboboxBil = new javax.swing.JComboBox();
         txtTidsrum = new javax.swing.JTextField();
@@ -83,6 +84,11 @@ public class MainFrame extends javax.swing.JFrame {
         txtKørt.setText("Kørt Timer");
 
         BtnGem.setText("Gem");
+        BtnGem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGemActionPerformed(evt);
+            }
+        });
 
         BtnReperation.setText("Reperation...");
 
@@ -90,28 +96,38 @@ public class MainFrame extends javax.swing.JFrame {
 
         txtIndsats.setText("Navn på indsats");
 
+        buttonGroup2.add(CheckBoxCH);
         CheckBoxCH.setText("CH");
 
+        buttonGroup2.add(CheckBoxX);
         CheckBoxX.setText("X");
 
+        buttonGroup2.add(CheckBoxSt);
         CheckBoxSt.setText("ST");
 
         jLabel1.setText("Fremmøde Ved");
 
+        buttonGroup1.add(RBtnIndsats);
         RBtnIndsats.setText("Indsats");
 
+        buttonGroup1.add(RBtnØvelse);
         RBtnØvelse.setText("Øvelse");
 
+        buttonGroup1.add(RBtnBandvagt);
         RBtnBandvagt.setText("Bandvagt");
 
+        buttonGroup1.add(RBtnStandby);
         RBtnStandby.setText("Stand-by");
 
+        buttonGroup1.add(RBtnFalck);
         RBtnFalck.setText("Arbejde Falck");
 
+        buttonGroup1.add(RBtnFølgeskade);
         RBtnFølgeskade.setText("Følgeskade");
 
         jLabel2.setText("Hvad");
 
+        buttonGroup1.add(RBtnSkade);
         RBtnSkade.setText("Andet (hvad)");
 
         jTextField6.setText("/ /");
@@ -215,6 +231,12 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnGemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGemActionPerformed
+//        try{
+//            Fireman Fm = new Fireman(txtCpr.getText(), ComboboxBil.getSelectedItem(), txtTidsrum.getText(), txtKørt.getText(), buttonGroup1.getSelection(),buttonGroup2.getSelection()tedIndex());
+        
+    }//GEN-LAST:event_BtnGemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -267,6 +289,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton RBtnStandby;
     private javax.swing.JRadioButton RBtnØvelse;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField6;
@@ -294,6 +317,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     
+//        outputGroupe = new ButtonGroupe();
+//        
+//        
+//        
+//        
+//        
 //        BtnGem.addActionListener(new ActionListener(){
 //            
 //            @Override
