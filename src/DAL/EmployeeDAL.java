@@ -31,7 +31,7 @@ public class EmployeeDAL extends AbstractDAL {
                 String lastName = rs.getString("efternavn");
                 String address = rs.getString("adresse");
                 String phone = rs.getString("telefon");
-                String callNo = rs.getString("udkalds_nummer");
+                String callNo = rs.getString("udkaldsnummer");
                 String paymentNo = rs.getString("løn_nummer");
                 fm = new Fireman(cprNo, firstName, lastName, address, phone, callNo, paymentNo);
             }

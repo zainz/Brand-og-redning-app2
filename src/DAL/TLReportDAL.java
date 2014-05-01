@@ -27,6 +27,8 @@ public class TLReportDAL extends AbstractDAL {
     public void newTeamLeaderReport(TeamLeaderReport tlr) throws SQLException{
         Connection con = null;
         
+        
+        
         try{
             con = getConnection();
             stmt = con.createStatement();
@@ -40,7 +42,7 @@ public class TLReportDAL extends AbstractDAL {
             
             int forbrugId = stmt.getGeneratedKeys().getInt(1);
             
-            stmt.executeUpdate("INSERT INTO Udrykning (dato, ugedag, beskrivelse, alarm_modtaget, indsatsleder, holdleder, forbrug_FK, udryknings_no, eva_no, bemærkning)"
+            stmt.executeUpdate("INSERT INTO Udrykning (dato, ugedag, beskrivelse, alarm_modtaget, indsatsleder, holdleder, forbrug, udryknings_no, eva_no, bemærkning)"
                     + " VALUES('" + tlr.getDato()+ "', '" + tlr.getUgedag()+ "', '" + tlr.getBeskrivelse()+ "', '" 
                     + tlr.getAlarmModtaget()+ "', '" + tlr.getIndsatsleder() + "', " + tlr.getHoldleder() + ", " + forbrugId + ", " + tlr.getUdrykningsNo()+ ", '" + tlr.getEvaNo()+ "', '" 
                     + tlr.getBemærkning() + "')");
@@ -49,18 +51,18 @@ public class TLReportDAL extends AbstractDAL {
         }
     }
     
-    public void addInjury(InjuredPerson ip) throws SQLException{
+    public void addInjury(InjuredPerson ip, int udrykning) throws SQLException{
         Connection con = null;
         
         try{
             con = getConnection();
             stmt = con.createStatement();
-            stmt.executeUpdate("INSERT INTO Tilskadekommende (fornavn, efternavn, adresse) "
+            stmt.executeUpdate("INSERT INTO tilskadekommende (fornavn, efternavn, adresse) "
                     + "VALUES ('" + ip.getFirstName() + "', '" + ip.getLastName() + "', '" + ip.getAddress() + "')", Statement.RETURN_GENERATED_KEYS);
                     
             int temp = stmt.getGeneratedKeys().getInt(1);
             stmt.executeUpdate("INSERT INTO Udryknings_tilskadekommende (udrykning, tilskadekommende) "
-                    + "VALUES (udrykning, " + temp + ")");
+                    + "VALUES (" + udrykning + ", " + temp + ")");
         } finally{
             if(con != null) con.close();
         }

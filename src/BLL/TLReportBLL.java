@@ -6,6 +6,7 @@
 
 package BLL;
 
+import BE.InjuredPerson;
 import BE.TeamLeaderReport;
 import DAL.TLReportDAL;
 import java.sql.SQLException;
@@ -20,6 +21,10 @@ public class TLReportBLL {
     public void newTeamLeaderReport(TeamLeaderReport tlr) throws SQLException{
         
         tld.newTeamLeaderReport(tlr);
+    }
+    
+    public void addInjury(InjuredPerson ip, int udrykning) throws SQLException{
+        tld.addInjury(ip, udrykning);
     }
     
     
