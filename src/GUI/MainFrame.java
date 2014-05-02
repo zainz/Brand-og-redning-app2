@@ -5,9 +5,7 @@
  */
 
 package GUI;
-import BE.Fireman;
-import BE.ErrorReport;
-import BE.TeamLeaderReport;
+import BE.Shift;
 import BLL.EmployeeBLL;
 import BLL.ErrorReportBLL;
 import BLL.TLReportBLL;
@@ -15,6 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +26,8 @@ public class MainFrame extends javax.swing.JFrame {
     EmployeeBLL EBLL;
     ErrorReportBLL ERBLL;
     TLReportBLL TLRBLL;
+    ButtonGroup checkboxes;
+    ButtonGroup ferie;
     
     
     /**
@@ -50,18 +53,15 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         txtCpr = new javax.swing.JTextField();
         ComboboxBil = new javax.swing.JComboBox();
-        txtTidsrum = new javax.swing.JTextField();
         txtKørt = new javax.swing.JTextField();
         BtnGem = new javax.swing.JButton();
         BtnReperation = new javax.swing.JButton();
         BtnHoldLeder = new javax.swing.JButton();
         txtHvad = new javax.swing.JTextField();
         txtIndsats = new javax.swing.JTextField();
-        CheckBoxCH = new javax.swing.JCheckBox();
-        CheckBoxX = new javax.swing.JCheckBox();
-        CheckBoxSt = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         RBtnIndsats = new javax.swing.JRadioButton();
         RBtnØvelse = new javax.swing.JRadioButton();
@@ -71,15 +71,25 @@ public class MainFrame extends javax.swing.JFrame {
         RBtnFølgeskade = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         RBtnSkade = new javax.swing.JRadioButton();
-        jTextField6 = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        CheckBoxCH = new javax.swing.JCheckBox();
+        CheckBoxX = new javax.swing.JCheckBox();
+        CheckBoxSt = new javax.swing.JCheckBox();
+        jcaDato = new com.toedter.calendar.JDateChooser();
+        jPanel2 = new javax.swing.JPanel();
+        rbtHoldleder = new javax.swing.JRadioButton();
+        rbtAlm = new javax.swing.JRadioButton();
+        cbxFerie = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblLogind = new javax.swing.JLabel();
+        lblLogud = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtCpr.setText("Navn CPR?");
 
         ComboboxBil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bil" }));
-
-        txtTidsrum.setText("Tidsrum");
 
         txtKørt.setText("Kørt Timer");
 
@@ -91,12 +101,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         txtIndsats.setText("Navn på indsats");
 
-        CheckBoxCH.setText("CH");
-
-        CheckBoxX.setText("X");
-
-        CheckBoxSt.setText("ST");
-
         jLabel1.setText("Fremmøde Ved");
 
         RBtnIndsats.setText("Indsats");
@@ -106,6 +110,11 @@ public class MainFrame extends javax.swing.JFrame {
         RBtnBandvagt.setText("Bandvagt");
 
         RBtnStandby.setText("Stand-by");
+        RBtnStandby.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RBtnStandbyActionPerformed(evt);
+            }
+        });
 
         RBtnFalck.setText("Arbejde Falck");
 
@@ -115,7 +124,79 @@ public class MainFrame extends javax.swing.JFrame {
 
         RBtnSkade.setText("Andet (hvad)");
 
-        jTextField6.setText("/ /");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Vagt type"));
+
+        CheckBoxCH.setText("CH");
+
+        CheckBoxX.setText("X");
+
+        CheckBoxSt.setText("ST");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CheckBoxCH)
+                    .addComponent(CheckBoxX)
+                    .addComponent(CheckBoxSt))
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(CheckBoxCH)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CheckBoxX)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CheckBoxSt)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Rolle"));
+
+        rbtHoldleder.setText("Holdleder");
+
+        rbtAlm.setText("Alm.");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtHoldleder)
+                    .addComponent(rbtAlm))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbtHoldleder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbtAlm)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        cbxFerie.setText("Feriedag");
+        cbxFerie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFerieActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Log ind:");
+
+        jLabel4.setText("Log ud:");
+
+        lblLogind.setText("Logind");
+
+        lblLogud.setText("Logud");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,51 +206,92 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnGem)
+                        .addComponent(BtnHoldLeder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnReperation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnHoldLeder))
+                        .addComponent(BtnGem))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCpr)
-                            .addComponent(ComboboxBil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtTidsrum)
-                            .addComponent(txtKørt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CheckBoxSt)
-                            .addComponent(CheckBoxCH)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtCpr)
+                                .addComponent(ComboboxBil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtKørt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxFerie)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblLogind))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblLogud))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jcaDato, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtIndsats, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(CheckBoxX)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtHvad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtHvad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(RBtnIndsats)
-                                    .addComponent(RBtnØvelse)
-                                    .addComponent(RBtnBandvagt)
-                                    .addComponent(RBtnStandby)
-                                    .addComponent(RBtnFalck)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(RBtnFølgeskade)
-                                    .addComponent(RBtnSkade))
-                                .addGap(15, 15, 15))
-                            .addComponent(jLabel2))))
+                                    .addComponent(RBtnFalck)
+                                    .addComponent(RBtnSkade)
+                                    .addComponent(RBtnIndsats)
+                                    .addComponent(RBtnBandvagt)
+                                    .addComponent(RBtnØvelse)
+                                    .addComponent(RBtnStandby))
+                                .addGap(33, 33, 33)))))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jcaDato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ComboboxBil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtKørt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbxFerie)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(lblLogind))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(lblLogud)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addComponent(RBtnIndsats)
-                        .addGap(4, 4, 4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(RBtnØvelse)
-                        .addGap(7, 7, 7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(RBtnBandvagt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(RBtnStandby)
@@ -177,44 +299,34 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(RBtnFalck)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(RBtnFølgeskade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RBtnSkade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtHvad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ComboboxBil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTidsrum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtKørt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(CheckBoxCH)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CheckBoxX)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CheckBoxSt)))
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIndsats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RBtnSkade)))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIndsats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHvad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnGem)
                     .addComponent(BtnReperation)
                     .addComponent(BtnHoldLeder))
-                .addContainerGap())
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void RBtnStandbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBtnStandbyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RBtnStandbyActionPerformed
+
+    private void cbxFerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFerieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxFerieActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnGem;
@@ -232,17 +344,33 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton RBtnStandby;
     private javax.swing.JRadioButton RBtnØvelse;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JCheckBox cbxFerie;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private com.toedter.calendar.JDateChooser jcaDato;
+    private javax.swing.JLabel lblLogind;
+    private javax.swing.JLabel lblLogud;
+    private javax.swing.JRadioButton rbtAlm;
+    private javax.swing.JRadioButton rbtHoldleder;
     private javax.swing.JTextField txtCpr;
     private javax.swing.JTextField txtHvad;
     private javax.swing.JTextField txtIndsats;
     private javax.swing.JTextField txtKørt;
-    private javax.swing.JTextField txtTidsrum;
     // End of variables declaration//GEN-END:variables
 
     public void setButtons(){
+        
+        checkboxes = new ButtonGroup();
+        checkboxes.add(CheckBoxCH);
+        checkboxes.add(CheckBoxSt);
+        checkboxes.add(CheckBoxX);
+        
+        ferie = new ButtonGroup();
         
     
         BtnReperation.addActionListener(new ActionListener(){
@@ -263,11 +391,25 @@ public class MainFrame extends javax.swing.JFrame {
             
             @Override
             public void actionPerformed(ActionEvent ae){
-                Fireman f = new Fireman(txtCpr.getText(), txtHvad.getText(), txtIndsats.getText(), txtKørt.getText(), txtTidsrum.getText(), ComboboxBil.getSelectedItem().toString(),buttonGroup1.getSelection().toString());
+                int ferie = 0;
+                if(cbxFerie.isSelected()){
+                    ferie = 1;
+                }
+                int timer = Integer.parseInt(txtKørt.getText());
+                Shift s = new Shift(txtCpr.getText(), ComboboxBil.getSelectedItem().toString(), timer, jcaDato.getDateFormatString(), buttonGroup2.getSelection().toString(), checkboxes.getSelection().toString(), txtIndsats.getText(), buttonGroup1.getSelection().toString(), ferie, txtHvad.getText(), lblLogind.getText(), lblLogud.getText());
+                editShift(s);
             }
         });
 
    }
+    
+    public void editShift(Shift s){
+        try{
+            TLRBLL.editShift(s);
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(this, "Connection to database lost: " + e.getMessage());
+        }
+    }
     
     class myKeyListener extends KeyAdapter{ 
         
@@ -276,6 +418,6 @@ public class MainFrame extends javax.swing.JFrame {
             if (e.getKeyChar() == KeyEvent.VK_ENTER) {
             }  
                 
-            }
+        }
     }
 }
