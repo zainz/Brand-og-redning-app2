@@ -5,6 +5,7 @@
  */
 
 package GUI;
+import BE.Fireman;
 import BE.Shift;
 import BLL.EmployeeBLL;
 import BLL.ErrorReportBLL;
@@ -409,6 +410,10 @@ public class MainFrame extends javax.swing.JFrame {
         } catch(SQLException e){
             JOptionPane.showMessageDialog(this, "Connection to database lost: " + e.getMessage());
         }
+    }
+    
+    public void setData(Fireman fm){
+        
     }
     
     class myKeyListener extends KeyAdapter{ 
